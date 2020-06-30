@@ -4,18 +4,39 @@
     <title>WEB - Welcome</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="colors.js"></script>
   </head>
   <body>
     <h1><a href="index.html">WEB</a></h1>
     <div id = "grid">
       <ol id = "navigation">
-        <li><a href="1.html">HTML</a></li>
-        <li><a href="2.html">CSS</a></li>
-        <li><a href="3.html">JavaScript</a></li>
+        <li><a href= '#!html' onclick="fetchPage('html')">HTML</a></li>
+        <li><a href= '#!css' onclick="fetchPage('css')">CSS</a></li>
+        <li><a href= '#!javascript' onclick="fetchPage('javascript')">JavaScript</a></li>
       </ol>
       <div id = "article">
-        <h2>WEB</h2>
-        <p>Web is a computer programming system created by Donald E. Knuth as the first implementation of what he called "literate programming": the idea that one could create software as works of literature, by embedding source code inside descriptive text, rather than the reverse (as is common practice in most programming languages), in an order that is convenient for exposition to human readers, rather than in the order demanded by the compiler.</p>
+        <article>
+          <h2>WEB</h2>
+          <p>Web is a computer programming system created by Donald E. Knuth as the first implementation of what he called "literate programming": the idea that one could create software as works of literature, by embedding source code inside descriptive text, rather than the reverse (as is common practice in most programming languages), in an order that is convenient for exposition to human readers, rather than in the order demanded by the compiler.</p>
+        </article>
+        <input type="button" value="morning" onclick="
+        Switch(this);
+        ">
+        <script>
+          function fetchPage(name){
+            fetch(name).then(function(response){
+              response.text().then(function(text){
+                document.querySelector('article').innerHTML = text;
+              })
+            });
+          }
+          if(location.hash){
+            fetchPage(location.hash.substr(2));
+          }else{
+            fetchPage('StartPage')
+          }
+        </script>
       </div>
     </div>
   </body>
