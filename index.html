@@ -6,14 +6,40 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="colors.js"></script>
+    <script>
+      function fetchPage(name){
+        fetch(name).then(function(response){
+          response.text().then(function(text){
+            document.querySelector('article').innerHTML = text;
+          })
+        });
+      }
+      fetch('list').then(function(response){
+        response.text().then(function(text){
+          var items = text.split(',');
+          var tags = '';
+          var i =0;
+          while(i<items.length){
+            var item = items[i];
+            item = item.trim();
+            var tag = '<li><a href = "#!'+item+'" onclick ="fetchPage(\''+item+'\')">'+item+'</a></li>';
+            tags = tags+tag;
+            i = i+1;
+          }
+          document.querySelector('#navigation').innerHTML = tags;
+        })
+      });
+      if(location.hash){
+        fetchPage(location.hash.substr(2));
+      }else{
+        fetchPage('StartPage')
+      }
+    </script>
   </head>
   <body>
     <h1><a href="index.html">WEB</a></h1>
     <div id = "grid">
       <ol id = "navigation">
-        <li><a href= '#!html' onclick="fetchPage('html')">HTML</a></li>
-        <li><a href= '#!css' onclick="fetchPage('css')">CSS</a></li>
-        <li><a href= '#!javascript' onclick="fetchPage('javascript')">JavaScript</a></li>
       </ol>
       <div id = "article">
         <article>
@@ -23,20 +49,6 @@
         <input type="button" value="morning" onclick="
         Switch(this);
         ">
-        <script>
-          function fetchPage(name){
-            fetch(name).then(function(response){
-              response.text().then(function(text){
-                document.querySelector('article').innerHTML = text;
-              })
-            });
-          }
-          if(location.hash){
-            fetchPage(location.hash.substr(2));
-          }else{
-            fetchPage('StartPage')
-          }
-        </script>
       </div>
     </div>
   </body>
