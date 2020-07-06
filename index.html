@@ -1,43 +1,23 @@
 <!doctype html>
 <html>
   <head>
-    <title>WEB - Welcome</title>
+    <title>공부하다 만들어진 페이지</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="colors.js"></script>
-    <script>
-      function fetchPage(name){
-        fetch(name).then(function(response){
-          response.text().then(function(text){
-            document.querySelector('article').innerHTML = text;
-          })
-        });
-      }
-      fetch('list').then(function(response){
-        response.text().then(function(text){
-          var items = text.split(',');
-          var tags = '';
-          var i =0;
-          while(i<items.length){
-            var item = items[i];
-            item = item.trim();
-            var tag = '<li><a href = "#!'+item+'" onclick ="fetchPage(\''+item+'\')">'+item+'</a></li>';
-            tags = tags+tag;
-            i = i+1;
-          }
-          document.querySelector('#navigation').innerHTML = tags;
-        })
-      });
-      if(location.hash){
-        fetchPage(location.hash.substr(2));
-      }else{
-        fetchPage('StartPage')
-      }
-    </script>
+    <script src="loadPage.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
   </head>
   <body>
-    <h1><a href="index.html">WEB</a></h1>
+    <header>
+      <h1 class = "banners"><a href="index.html">공부하다 만들어진 페이지</a></h1>
+    </header>
+    <!-- <div calss = "container">
+      <img src="/banner1.jpg" alt="Norway" width = "autoplay" height="300px">
+      <div class="text-block"> -->
+      <!-- </div>
+    </div> -->
     <div id = "grid">
       <ol id = "navigation">
       </ol>
