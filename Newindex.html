@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="colors.js"></script>
     <script src="loadPage.js"></script>
+    <script src="loadMainMenu.js"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
   </head>
   <body>
@@ -14,22 +15,36 @@
       <div class = "head">
         <header>
           <hgroup>
-            <h1 class = "title"><a href="Newindex.html">25/7</a></h1>
+            <h1 class = "title"><a href="Newindex.html" style="text-decoration: none;">25/7</a></h1>
             <p class = "subtitle">
               <small>매일 매일 코딩</small>
           </hgroup>
           <ul id = left_select>
             <li id="to_home">
-              <a href="https://tfs247.tistory.com" >
+              <a href="https://tfs247.tistory.com" target="_blank" style="text-decoration: none;">
                 <span>My</span>
                 blog
               </a>
             </li>
             <li id = unfold_menu>
-              <a href="#" class = "title">Menu</a>
+              <a href="#" class = "title" style="text-decoration: none;">Menu</a>
             </li>
           </ul>
         </header>
+        <nav id="main_menu">
+          <div class = "wrapper">
+            <ul class = "sub_nav">
+              <!-- <li>
+                <div class="label_public">
+                  <a class = "courselink" href="#">
+                    HTML
+                    <span class = "ico ico_lock"></span>
+                  </a>
+                </div>
+              </li> -->
+            </ul>
+          </div>
+        </nav>
       </div>
       <div class = "body">
         <div id = "grid">
