@@ -1,36 +1,24 @@
-var http = require('http');
-$.ajax({
-    url: 'http://localhost:3000/?id=mainMenu',
-    method:'POST'
-  }).done(function(data){
+function loadLeftMenu(name){
+  $.post('http://localhost:3000/severalMenu',{ name : name}).done(function(data){
     if(data.success){
-      console.log(data.message);
+      var tags = '';
+      var i =0;
+      while(i<data.message.length){
+        var item = data.message[i].substr(1);
+        item = item.trim();
+        var tag = '<li><div><a href="#" style="text-decoration: none;">'+item+'</a></div></li>';
+        tags = tags + tag;
+        i = i+1;
+      }
+      $('#load_left').html(tags);
     }
   });
+}
 
-// fs.readdir(path, function(error, filelist){
-//   var tags = '';
-//   var i = 0;
-//   while(i<items.length){
-//     var item = filelist[i];
-//     item = item.trim();
-//     var tag = '<li><div class="label_public"><a class = "courselink" href="#" style="text-decoration: none;" onclick = "changeClass(\''+item+'\');loadLeftMenu(\''+item+'\')">'+ item +'</a></div></li>';
-//     tags = tags+tag;
-//     i = i+1;
-//   }
-//   var a =$('.sub_nav');
-//   a.append(tags);
-// });
 function changeClass(name){
-  // console.log(obj);
-  // console.log(obj.innerText);
-  // console.log(obj.className);
   var items = $(".sub_nav > li > div > a");
-  console.log(items);
   for(item of items){
     var check1 = item.innerText.trim();
-    // var check2 = obj.innerText.trim();
-    console.log("itme.text : "+check1 + ", item className : "+item.className);
     if(item.className == "selected"){
       item.className = "courselink";
     }
@@ -38,40 +26,23 @@ function changeClass(name){
       item.className = "selected";
   }
 }
-function loadLeftMenu(name){
-  var str = name + "_left_menu";
-  fetch(str).then(function(response){
-    response.text().then(function(text){
-      var items = text.split(',');
+
+$.ajax({
+    url: 'http://localhost:3000/mainMenu',
+    method:'POST'
+  }).done(function(data){
+    if(data.success){
       var tags = '';
-      var i =0;
-      while(i<items.length){
-        var item = items[i];
+      var i = 0;
+      while(i<data.message.length){
+        var item = data.message[i].substr(1);
         item = item.trim();
-        var tag = '<li><div><a href="#" style="text-decoration: none;">'+item+'</a></div></li>';
-        tags = tags + tag;
+        var retval = data.message[i].trim();
+        var tag = '<li><div class="label_public"><a class = "courselink" href="#" style="text-decoration: none;" onclick = "loadLeftMenu(\''+retval+'\');changeClass(\''+item+'\');">'+ item +'</a></div></li>';
+        tags = tags+tag;
         i = i+1;
       }
-      $('#load_left').html(tags);
-      // console.log(tags);
-      // a.html = tags;
-    })
+      var a =$('.sub_nav');
+      a.append(tags);
+    }
   });
-}
-//
-// fetch('MainMenuList').then(function(response){
-//   response.text().then(function(text){
-//     var items = text.split(',');
-//     var tags = '';
-//     var i = 0;
-//     while(i<items.length){
-//       var item = items[i];
-//       item = item.trim();
-//       var tag = '<li><div class="label_public"><a class = "courselink" href="#" style="text-decoration: none;" onclick = "changeClass(\''+item+'\');loadLeftMenu(\''+item+'\')">'+ item +'</a></div></li>';
-//       tags = tags+tag;
-//       i = i+1;
-//     }
-//     var a =$('.sub_nav');
-//     a.append(tags);
-//   })
-// });

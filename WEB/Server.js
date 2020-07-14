@@ -2,20 +2,40 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var downList = ['/colors.js','/loadMainMenu.js','/Newstyle.css','/banner1.jpg','/icon_allview.png'];
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : true}));
+
 app.get('/',function(req,res){
   var _url = req.url;
   var queryData = url.parse(_url, true).query;
-  console.log(queryData.id);
   if(queryData.id == undefined){
         _url = '/index.html';
         // console.log('in');
         res.writeHead(200);
         res.end(fs.readFileSync(__dirname+_url));
-      }else if(queryData.id == 'mainMenu'){
-        res.send("BLCOK");
       }
+});
+
+app.post('/severalMenu',function(req,res){
+  console.log(req.body.name);
+  fs.readdir('./MainMenu/'+req.body.name,function(error,filelist){
+    console.log('what');
+    console.log(filelist);
+    res.send({success : true, message : filelist});
+  });
+});
+
+app.post('/mainMenu',function(req,res){
+  console.log("checking");
+  fs.readdir('./MainMenu',function(error,filelist){
+    console.log('what');
+    console.log(filelist);
+    res.send({success : true, message : filelist});
+  });
 });
 
 app.get(downList[0],function(req,res){
