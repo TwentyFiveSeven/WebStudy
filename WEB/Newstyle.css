@@ -101,6 +101,59 @@ nav#main_menu>div.wrapper>ul>li{
   margin-top: 0px;
   padding-left: 0px;
 }
+.sub_nav > li > div > a{
+  font-size : 20px;
+}
 .selected{
   color : green;
+}
+aside{
+  width: 250px;
+  display: block;
+  float:left;
+}
+#body{
+  height: 800px;
+}
+#body > .wrapper {
+    width: 980px;
+    height : 800px;
+    margin:0px;
+    position: relative;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+#article{
+  width: 730px;
+  float: left;
+}
+
+.whole_side > .coverPage > a,.whole_side > nav > ul > li > div > a{
+  padding-left: 20px;
+  font-size: 14px;
+}
+.whole_side > h2{
+  padding-left: 20px;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+.whole_side > .coverPage{
+  margin-top : 10px;
+}
+#load_left{
+  padding-left: 10px;
+  list-style-type: none;
+  list-style: none;
+}
+
+#load_left > li{
+  height : 40px;
+  padding-top: 10px;
+}
+#load_left > li > div > a{
+  color: gray;
+}
+#load_left :hover, #load_left > li:hover, #load_left > li > div > a:hover, .coverPage :hover{
+  background-color: #ccc;
+  color: #3c9;
 }
