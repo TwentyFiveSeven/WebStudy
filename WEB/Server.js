@@ -20,6 +20,31 @@ app.get('/',function(req,res){
       }
 });
 
+app.post('/readfile',function(req,res){
+  console.log("in?");
+  fs.readFile(req.body.name, 'utf8', function(err, data){
+    res.send({success : true, text : data});
+  });
+});
+
+app.post('/loadfiles',function(req,res){
+  var retlist = [];
+  var day = [];
+  fs.readdir('./MainMenu/'+req.body.name,function(error,filelist){
+    console.log('./MainMenu/'+req.body.name);
+    retlist = filelist;
+    var i = 0;
+    while(i<retlist.length){
+      var statV = fs.statSync('./MainMenu/'+req.body.name+'/'+retlist[i]);
+      day.push(statV.mtime.toDateString());
+      i = i+1;
+    }
+    console.log(retlist);
+    console.log(day);
+    res.send({success : true, message : retlist, Mtime : day});
+  });
+});
+
 app.post('/severalMenu',function(req,res){
   console.log(req.body.name);
   fs.readdir('./MainMenu/'+req.body.name,function(error,filelist){
