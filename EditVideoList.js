@@ -36,7 +36,7 @@ let LinkedList = function (){
     list.add = function(value){
         if(!VideoList.has(value))
             return;
-        let node = VideoList.get(value);
+        let node = Object.assign({},VideoList.get(value));
         list.executeAdd(node);
         list.printList();
     };
@@ -77,7 +77,7 @@ let LinkedList = function (){
     list.insert = function(depth,value){
         if(!VideoList.has(value))
             return;
-        let node = VideoList.get(value);
+        let node = Object.assign({},VideoList.get(value));
         list.executeInsert(node,depth);
         list.printList();
     };
