@@ -105,6 +105,7 @@ HashMap.prototype.put = function (k, v) {
             this.storage[key].size +=1;
         }
     }
+    if(this.storage[key].size > this.bucket_size*2) this.increaseBucketSize();
 };
 
 //해당 키에 있는 값을 삭제한다. 기존에 key가 없으면 아무것도 하지 않는다.
@@ -158,6 +159,7 @@ HashMap.prototype.replace = function (k, v) {
             now.v = v;
         }
     }
+    if(this.storage[key].size > this.bucket_size*2) this.increaseBucketSize();
 };
 
 //전체 아이템 개수를 리턴한다.
@@ -176,4 +178,18 @@ HashMap.prototype.HashValue = function (k) {
     return p%this.bucket_size;
 };
 
+//put(), replace() 함수를 진행했을 때 한개의 Storage에 BucketSize*2보다 큰 양의 Key-Value 쌍이 들어갈시에 BucketSize를 늘리고 Storage도 BucketSize만큼 늘려서 이전 Key-Value쌍들을 새로운 Storage에 다시 Hashing하여 재배치 합니다.
+HashMap.prototype.increaseBucketSize = function(){
+    let newstorage = Array(this.bucket_size*2);
+    for(let i = 0; i < newstorage.length; i++)
+        newstorage[i] = new LinkedList();
+    let keylist = this.keys();
+    let valuelist = [];
+    for(let i = 0;i<keylist.length;i++)
+        valuelist.push(this.getValue(keylist[i]));
+    this.storage = newstorage;
+    this.bucket_size = this.bucket_size*2;
+    for(let i = 0;i<keylist.length;i++)
+        this.put(keylist[i],valuelist[i]);
+}
 module.exports = HashMap
