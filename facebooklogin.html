@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WEB - Login</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="loadPage.js"></script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '579305572724144',
+          cookie     : true,                     // Enable cookies to allow the server to access the session.
+          xfbml      : true,                     // Parse social plugins on this webpage.
+          version    : 'v7.0'           // Use this Graph API version for this call.
+        });
+        var callback = function(response){
+          console.log(response)
+          //statusChangeCallback(response);
+          if(response.status === 'connected'){
+            $('#authBtn').attr('value','Logout');
+          }else{
+            $('#authBtn').attr('value','Login')
+          }
+        }
+        FB.getLoginStatus(callback); //인자로 함수를 받는다.
+      };
+    </script>
+
+      </script>
+  </head>
+  <body>
+    <input type = "button" id = "authBtn" value = "checking...">
+    <h1><a href="index.html">WEB</a></h1>
+    <div id = "grid">
+      <ol id = "navigation">
+        <li><a href = "FaceBookLogin">FaceBookLogin</a></li>
+      </ol>
+      <div id = "article">
+        <article>
+          <h2>FaceBookLogin</h2>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

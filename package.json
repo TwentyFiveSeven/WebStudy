@@ -1,0 +1,23 @@
+{
+  "name": "NodeJs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "EditVideoList.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xortm854/WebStudy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xortm854/WebStudy/issues"
+  },
+  "homepage": "https://github.com/xortm854/WebStudy#readme",
+  "devDependencies": {
+    "jest": "^26.1.0"
+  }
+}
